@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+            rel="stylesheet"
+        />
+        <title>Link Short</title>
+        <style>
+            :root {
+                color-scheme: dark ligth;
+                background-color: #151515;
+            }
+
+            body {
+                font-family: "DM Sans", serif;
+            }
+        </style>
+    </head>
+
+    <body class="mx-auto max-w-3xl py-8 px-4 xl:px-0">
+        <header class="space-y-2">
+            <h1 class="text-2xl font-semibold">Link Short</h1>
+            <h2 class="text-lg underline">
+                By
+                <a href="https://www.luiseduardocortes.xyz/"
+                    >Luis Eduardo Ocegueda Cortes 🇲🇽</a
+                >
+            </h2>
+            <p class="text-md text-neutral-400">
+                Nuestro acortador de enlaces hace que compartir sea más fácil y
+                eficiente. Convierte URLs largas en enlaces cortos y amigables,
+                mientras te permite monitorear cuántas personas han visitado tu
+                enlace. Ideal para campañas, redes sociales y para mantener un
+                control sencillo de tus enlaces compartidos.
+            </p>
+        </header>
+        <main class="mt-8 md:mt-16">
+            <section
+                class="bg-neutral-800 border border-neutral-600 rounded-md p-4 md:p-6"
+            >
+                {{ embed }}
+            </section>
+        </main>
+    </body>
+</html>
