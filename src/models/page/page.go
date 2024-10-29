@@ -18,3 +18,9 @@ func GetByAlias(page *models.Page, alias string) error {
 	result := database.DB.First(page, "alias = ?", alias)
 	return result.Error
 }
+
+func IncreaseVisits(page *models.Page) error {
+	page.Visits++
+	result := database.DB.Save(page)
+	return result.Error
+}

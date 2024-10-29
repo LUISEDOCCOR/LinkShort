@@ -1,7 +1,6 @@
 package page_controller
 
 import (
-	"fmt"
 	"link-shortener/src/models"
 	page_model "link-shortener/src/models/page"
 	"os"
@@ -30,18 +29,15 @@ func Create(c *fiber.Ctx) error {
 	domain := os.Getenv("domain")
 	shortUrl := domain + page.Alias
 
-	return c.Render("create", fiber.Map{"url": shortUrl}, "layouts/layout")
+	return c.Render("create", fiber.Map{"url": shortUrl, "alias": page.Alias}, "layouts/layout")
 }
 
 func GoToUrl(c *fiber.Ctx) error {
 	alias := c.Params("alias")
-	fmt.Printf(alias)
 	page := new(models.Page)
 
 	err := page_model.GetByAlias(page, alias)
-
 	if err != nil {
-		fmt.Printf(err.Error())
 		return c.Redirect("/")
 	}
 
@@ -49,5 +45,27 @@ func GoToUrl(c *fiber.Ctx) error {
 		return c.Redirect("/")
 	}
 
+	err = page_model.IncreaseVisits(page)
+	if err != nil {
+		return c.Redirect("/")
+	}
+
 	return c.Redirect(page.Url)
+}
+
+func Analytics(c *fiber.Ctx) error {
+	alias := c.Params("alias")
+	page := new(models.Page)
+
+	err := page_model.GetByAlias(page, alias)
+	if err != nil {
+		return c.Redirect("/")
+	}
+
+	if page.ID == 0 {
+		return c.Redirect("/")
+	}
+
+	return c.Render("analytics", fiber.Map{"original_url": page.Url, "visits": page.Visits}, "layouts/layout")
+
 }
